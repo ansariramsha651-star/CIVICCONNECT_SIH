@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Submit Complaint | CivicConnect
+{% endblock %}
+
+
+{% block content %}
+
+<section class="complaint-page">
+
+    <div class="form-container">
+
+        <div class="form-heading">
+
+            <p class="small-heading">
+                REPORT A CIVIC ISSUE
+            </p>
+
+            <h1>
+                Submit Your Complaint
+            </h1>
+
+            <p>
+                Tell us about the problem in your area.
+                Your complaint will be analyzed and
+                routed to the appropriate department.
+            </p>
+
+        </div>
+
+
+        <form action="{{ url_for('submit_complaint') }}"
+              method="POST">
+
+
+            <!-- Citizen Name -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Complaint Title -->
+
+            <div class="form-group">
+
+                <label for="title">
+                    Complaint Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Example: Large pothole near railway station"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Complaint Description -->
+
+            <div class="form-group">
+
+                <label for="description">
+                    Describe the Problem
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="6"
+                    placeholder="Describe the problem in detail..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- Location -->
+
+            <div class="form-group">
+
+                <label for="location">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Example: Thane Station"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Complaint
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}
+Authority Dashboard | CivicConnect
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-page">
+
+    <div class="admin-heading">
+        <p class="small-heading">AUTHORITY PANEL</p>
+
+        <h1>Authority Dashboard</h1>
+
+        <p>
+            Manage citizen complaints and monitor their status.
+        </p>
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <h3>Total Complaints</h3>
+            <p>{{ total_complaints }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Pending</h3>
+            <p>{{ pending_complaints }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Resolved</h3>
+            <p>{{ resolved_complaints }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>High Priority</h3>
+            <p>{{ high_priority }}</p>
+        </div>
+
+    </div>
+
+
+    <!-- ALL COMPLAINTS -->
+
+    <div class="admin-complaints">
+
+        <div class="section-heading">
+            <div>
+                <p class="small-heading">COMPLAINT MANAGEMENT</p>
+                <h2>All Complaints</h2>
+            </div>
+        </div>
+
+
+        {% if complaints %}
+
+        <div class="complaint-list">
+
+            {% for complaint in complaints %}
+
+            <div class="admin-complaint-card">
+
+                <div class="complaint-top">
+
+                    <div>
+                        <h3>{{ complaint.title }}</h3>
+
+                        <p class="complaint-location">
+                            📍 {{ complaint.location }}
+                        </p>
+                    </div>
+
+                    <span class="priority-badge {{ complaint.priority|lower }}">
+                        {{ complaint.priority }}
+                    </span>
+
+                </div>
+
+
+                <p class="complaint-description">
+                    {{ complaint.description }}
+                </p>
+
+
+                <div class="complaint-info">
+
+                    <div>
+                        <strong>Category</strong>
+                        <span>{{ complaint.category }}</span>
+                    </div>
+
+                    <div>
+                        <strong>Department</strong>
+                        <span>{{ complaint.department }}</span>
+                    </div>
+
+                    <div>
+                        <strong>Citizen</strong>
+                        <span>{{ complaint.name }}</span>
+                    </div>
+
+                    <div>
+                        <strong>Current Status</strong>
+                        <span>{{ complaint.status }}</span>
+                    </div>
+
+                </div>
+
+
+                <!-- UPDATE STATUS -->
+
+                <form
+                    action="{{ url_for('update_status', complaint_id=complaint.id) }}"
+                    method="POST"
+                    class="status-form"
+                >
+
+                    <label for="status-{{ complaint.id }}">
+                        Update Status
+                    </label>
+
+                    <select
+                        name="status"
+                        id="status-{{ complaint.id }}"
+                    >
+
+                        <option value="Pending"
+                            {% if complaint.status == "Pending" %}selected{% endif %}>
+                            Pending
+                        </option>
+
+                        <option value="In Progress"
+                            {% if complaint.status == "In Progress" %}selected{% endif %}>
+                            In Progress
+                        </option>
+
+                        <option value="Resolved"
+                            {% if complaint.status == "Resolved" %}selected{% endif %}>
+                            Resolved
+                        </option>
+
+                    </select>
+
+                    <button type="submit" class="submit-btn">
+                        Update Status
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <h3>No complaints yet</h3>
+            <p>Citizen complaints will appear here.</p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home | CivicConnect
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="hero-tag">
+            SMART CITIZEN GRIEVANCE PLATFORM
+        </p>
+
+        <h1>
+            Your Complaint.
+            <span>Our Responsibility.</span>
+        </h1>
+
+        <p class="hero-description">
+            Report civic issues, track complaints, and help create
+            cleaner, safer and better communities.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('submit_complaint') }}"
+               class="btn btn-primary">
+                Report a Problem
+            </a>
+
+            <a href="{{ url_for('complaints') }}"
+               class="btn btn-secondary">
+                Track Complaints
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="features">
+
+    <div class="section-heading">
+
+        <p class="small-heading">
+            HOW IT WORKS
+        </p>
+
+        <h2>
+            From Complaint to Resolution
+        </h2>
+
+        <p>
+            Our platform makes it easier for citizens and authorities
+            to manage civic problems.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-number">
+                01
+            </div>
+
+            <h3>
+                Submit
+            </h3>
+
+            <p>
+                Tell us about the civic problem you are facing.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-number">
+                02
+            </div>
+
+            <h3>
+                Analyze
+            </h3>
+
+            <p>
+                The system analyzes and categorizes your complaint.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-number">
+                03
+            </div>
+
+            <h3>
+                Route
+            </h3>
+
+            <p>
+                The complaint is directed to the appropriate department.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-number">
+                04
+            </div>
+
+            <h3>
+                Resolve
+            </h3>
+
+            <p>
+                Authorities can track and resolve the issue.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="ai-section">
+
+    <div>
+
+        <p class="small-heading">
+            INTELLIGENT GRIEVANCE MANAGEMENT
+        </p>
+
+        <h2>
+            Smarter complaints.
+            Faster action.
+        </h2>
+
+        <p>
+            Our platform will use AI to classify complaints,
+            identify priority, detect duplicate complaints
+            and identify areas with high complaint density.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | CivicConnect
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="dashboard-heading">
+
+        <p class="small-heading">
+            CITIZEN DASHBOARD
+        </p>
+
+        <h1>
+            Welcome, {{ user.name }}
+        </h1>
+
+        <p>
+            Track your complaints and monitor their progress.
+        </p>
+
+    </div>
+
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+
+            <h3>
+                Total Complaints
+            </h3>
+
+            <p>
+                {{ total_complaints }}
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Pending
+            </h3>
+
+            <p>
+                {{ pending_complaints }}
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Resolved
+            </h3>
+
+            <p>
+                {{ resolved_complaints }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-section">
+
+        <div class="section-heading">
+
+            <h2>
+                My Complaints
+            </h2>
+
+            <a href="{{ url_for('submit_complaint') }}"
+               class="btn btn-primary">
+                Submit New Complaint
+            </a>
+
+        </div>
+
+
+        {% if complaints %}
+
+            <div class="complaints-list">
+
+                {% for complaint in complaints %}
+
+                {% if complaint.duplicate_of %}
+
+    <div class="duplicate-warning">
+
+        ⚠️ Possible Duplicate Complaint
+
+        <p>
+            This complaint is similar to Complaint
+            #{{ complaint.duplicate_of }}
+        </p>
+
+        <p>
+            Similarity:
+            {{ "%.0f"|format(complaint.duplicate_similarity * 100) }}%
+        </p>
+
+    </div>
+
+{% endif %}
+
+                    <div class="complaint-card">
+
+                        <div class="complaint-top">
+
+                            <span class="complaint-id">
+                                #{{ complaint.id }}
+                            </span>
+
+                            <span class="status">
+                                {{ complaint.status }}
+                            </span>
+
+                        </div>
+
+
+                        <h2>
+                            {{ complaint.title }}
+                        </h2>
+
+
+                        <p class="complaint-description">
+                            {{ complaint.description }}
+                        </p>
+
+
+                        <div class="complaint-info">
+
+                            <p>
+                                <strong>Location:</strong>
+                                {{ complaint.location }}
+                            </p>
+
+                            <p>
+                                <strong>Category:</strong>
+                                {{ complaint.category or "Not assigned yet" }}
+                            </p>
+
+                            <p>
+                                <strong>Priority:</strong>
+                                {{ complaint.priority or "Not assigned yet" }}
+                            </p>
+
+                            <p>
+                                <strong>Department:</strong>
+                                {{ complaint.department or "Not assigned yet" }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <h2>
+                    No complaints yet
+                </h2>
+
+                <p>
+                    You haven't submitted any complaints.
+                </p>
+
+                <a href="{{ url_for('submit_complaint') }}"
+                   class="btn btn-primary">
+                    Report a Problem
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}
